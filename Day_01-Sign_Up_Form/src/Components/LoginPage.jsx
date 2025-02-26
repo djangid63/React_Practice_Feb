@@ -9,7 +9,7 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ Name: firstName, LastName: lastName, Email: email, Password: password })
+    console.log({ FirstName: firstName, LastName: lastName, Email: email, Password: password })
   };
 
   return (
