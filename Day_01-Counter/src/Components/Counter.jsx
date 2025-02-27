@@ -8,7 +8,9 @@ const Counter = () => {
   }
 
   const decrement = () => {
-    setCount((prevCount) => count > 0 ? prevCount - 1 : alert('Count cannot be less than 0'))
+    setCount((prevCount) => count > 0 ? prevCount - 1 : count)
+    if (count < 1)
+      alert('You cannot go below 0')
   }
 
   return (
