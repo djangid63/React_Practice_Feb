@@ -6,9 +6,16 @@ import { Link } from 'react-router-dom'
 const Api = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/comments')
-      .then(response => setData(response.data))
-      .catch(err => console.error(err));
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://jsonplaceholder.typicode.com/comments');
+        setData(response.data);
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
   }, [])
 
   return (
@@ -16,13 +23,13 @@ const Api = () => {
       <h1>Api</h1>
       <div>
         {
-          data.map((item) => (
-            <div key={item.id}>{item.name}</div>
+          data.slice(1, 4).map((item) => (
+            <div className='flex justify-center items-center' key={item.id}>
+              {item.name}
+            </div>
           ))
         }
       </div>
-      <Link to="/login">Login</Link>
-      <Link to="/signup">SignUp</Link>
     </div>
   )
 }
