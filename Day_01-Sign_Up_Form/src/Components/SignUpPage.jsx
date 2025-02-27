@@ -174,9 +174,8 @@ const SignUpPage = () => {
             <a
               href="#"
               className="font-medium text-yellow-600 hover:text-yellow ring-yellow-200"
-              onClick={() => setSignUp(!signUp)}
             >
-              Sign up
+              Sign in
             </a>
           </p>
         </form>

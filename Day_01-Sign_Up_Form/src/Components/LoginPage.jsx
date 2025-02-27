@@ -102,18 +102,19 @@ const LoginPage = () => {
             </button>
           </div>
 
-
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Don't have an account?{' '}
-            <Link to="/signup">
-              <a
-                href="#"
-                className="font-medium text-yellow-600 hover:text-yellow ring-yellow-200"
-              >
-                Sign up
-              </a>
-            </Link>
-          </p>
+          <Link to="/signup">
+            <div>
+              <p className="mt-2 text-center text-sm text-gray-600">
+                Don't have an account?{' '}
+                <a
+                  href="#"
+                  className="font-medium text-yellow-600 hover:text-yellow ring-yellow-200"
+                >
+                  Sign up
+                </a>
+              </p>
+            </div>
+          </Link>
         </form>
       </div>
     </div>
