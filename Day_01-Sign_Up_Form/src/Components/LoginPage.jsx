@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [firstName, setName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [signUp, setSignUp] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ FirstName: firstName, LastName: lastName, Email: email, Password: password })
+    const data = {
+      email,
+      password,
+    }
+
+    localStorage.setItem('user', JSON.stringify(data));
+    setEmail('');
+    setPassword('');
+
   };
 
   return (
@@ -27,103 +33,39 @@ const LoginPage = () => {
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
 
-          {
-            !signUp ? (
-              <div className="space-y-6">
-                <div>
-                  <label htmlFor="email" className="sr-only">
-                    Email address
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-yellring-yellow-200 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:border-yellring-yellow-200 sm:text-sm transition duration-200"
-                    placeholder="Email address"
-                  />
-                </div>
+          <div className="space-y-6">
+            <div>
+              <label htmlFor="email" className="sr-only">
+                Email address
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-yellring-yellow-200 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:border-yellring-yellow-200 sm:text-sm transition duration-200"
+                placeholder="Email address"
+              />
+            </div>
 
-                <div>
-                  <label htmlFor="password" className="sr-only">
-                    Password
-                  </label>
-                  <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-yellring-yellow-200 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:border-yellring-yellow-200 sm:text-sm transition duration-200"
-                    placeholder="Password"
-                  />
-                </div>
-              </div>
-            ) :
-              (
-                <div className="space-y-6">
-                  <div className='flex'>
-                    <label htmlFor='First name' className="sr-only">Name</label>
-                    <input
-                      id='First name'
-                      name='name'
-                      type='text'
-                      value={firstName}
-                      onChange={(e) => setName(e.target.value)}
-                      required
-                      className="mr-2 appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-yellring-yellow-200 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:border-yellow ring-yellow-200 sm:text-sm transition duration-200"
-                      placeholder='First Name'
-                    />
-                    <label htmlFor='lastName' className="sr-only">Last Name</label>
-                    <input
-                      id='lastName'
-                      name='lastName'
-                      type='text'
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      required
-                      className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-yellring-yellow-200 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:border-yellow ring-yellow-200 sm:text-sm transition duration-200"
-                      placeholder='Last Name'
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="sr-only">
-                      Email address
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-yellring-yellow-200 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:border-yellow ring-yellow-200 sm:text-sm transition duration-200"
-                      placeholder="Email address"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="password" className="sr-only">
-                      Password
-                    </label>
-                    <input
-                      id="password"
-                      name="password"
-                      type="password"
-                      required
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-yellring-yellow-200 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:border-yellow ring-yellow-200 sm:text-sm transition duration-200"
-                      placeholder="Password"
-                    />
-                  </div>
-                </div>
-              )
-          }
+            <div>
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-yellring-yellow-200 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:border-yellring-yellow-200 sm:text-sm transition duration-200"
+                placeholder="Password"
+              />
+            </div>
+          </div>
 
           <div className="flex items-center justify-between">
             <div className="flex items-center">
@@ -160,15 +102,17 @@ const LoginPage = () => {
             </button>
           </div>
 
+
           <p className="mt-2 text-center text-sm text-gray-600">
             Don't have an account?{' '}
-            <a
-              href="#"
-              className="font-medium text-yellow-600 hover:text-yellow ring-yellow-200"
-              onClick={() => setSignUp(!signUp)}
-            >
-              Sign up
-            </a>
+            <Link to="/signup">
+              <a
+                href="#"
+                className="font-medium text-yellow-600 hover:text-yellow ring-yellow-200"
+              >
+                Sign up
+              </a>
+            </Link>
           </p>
         </form>
       </div>
