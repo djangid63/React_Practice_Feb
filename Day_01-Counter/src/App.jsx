@@ -1,10 +1,10 @@
 import React from 'react'
-import LoginPage from './Components/LoginPage'
+import Counter from './Components/Counter'
 
 const App = () => {
   return (
-    <div >
-      <LoginPage />
+    <div>
+      <Counter />
     </div>
   )
 }
