@@ -13,9 +13,15 @@ const LoginPage = () => {
     }
 
     const userData = JSON.parse(localStorage.getItem('user'))
-
+    if (userData === null) {
+      alert('User not found! Please sign up')
+      return;
+    }
     if (userData.email === data.email && userData.password === data.password) {
       alert('Login Successful')
+    }
+    else {
+      alert('Invalid Credentials')
     }
     setEmail('');
     setPassword('');
