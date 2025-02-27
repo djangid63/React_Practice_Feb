@@ -17,7 +17,10 @@ const SignUpPage = () => {
       lastName
     }
 
-    localStorage.setItem('user', JSON.parse(localStorage.getItem('user')))
+    localStorage.setItem('user', JSON.stringify(data));
+    setEmail('');
+    setPassword('');
+
 
   };
 

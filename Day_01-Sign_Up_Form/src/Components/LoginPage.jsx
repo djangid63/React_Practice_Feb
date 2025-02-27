@@ -12,7 +12,11 @@ const LoginPage = () => {
       password,
     }
 
-    localStorage.setItem('user', JSON.stringify(data));
+    const userData = JSON.parse(localStorage.getItem('user'))
+
+    if (userData.email === data.email && userData.password === data.password) {
+      alert('Login Successful')
+    }
     setEmail('');
     setPassword('');
 
