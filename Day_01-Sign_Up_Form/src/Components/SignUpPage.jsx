@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [firstName, setName] = useState('');
+  const [firstName, setfirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
 
@@ -24,7 +24,7 @@ const SignUpPage = () => {
 
 
   };
-
+  console.log(JSON.parse(localStorage.getItem('user')));
   return (
 
     <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -47,7 +47,7 @@ const SignUpPage = () => {
                 name='name'
                 type='text'
                 value={firstName}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setfirstName(e.target.value)}
                 required
                 className="mr-2 appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-yellring-yellow-200 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:border-yellow ring-yellow-200 sm:text-sm transition duration-200"
                 placeholder='First Name'
