@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [signUp, setSignUp] = useState(true);
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();

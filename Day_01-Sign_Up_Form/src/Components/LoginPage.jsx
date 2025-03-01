@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const userData = JSON.parse(localStorage.getItem('user'))
+  const navigate = useNavigate();
+
+  const toSignUpPage = () => {
+    if (userData == null)
+      navigate("/signupPage")
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,7 +20,6 @@ const LoginPage = () => {
       password,
     }
 
-    const userData = JSON.parse(localStorage.getItem('user'))
     if (userData === null) {
       alert('User not found! Please sign up')
       return;
@@ -27,6 +34,8 @@ const LoginPage = () => {
     setPassword('');
 
   };
+
+
 
   return (
 
@@ -107,6 +116,7 @@ const LoginPage = () => {
             <button
               type="submit"
               className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white hover:bg-yellow-300 bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-200 transition duration-200"
+              onClick={toSignUpPage}
             >
               Sign in
             </button>
