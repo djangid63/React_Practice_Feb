@@ -17,26 +17,27 @@ const Api = () => {
 
       } catch (error) {
         console.error('Error fetching data:', error);
-        return filtedData;
+        return filteredData;
       }
     };
     fetchData();
   }, [])
 
-  const filtedData = data.filter((value) => {
+  const filteredData = data.filter((value) => {
     const abc = value.title.toLowerCase().includes(search.toLowerCase()) || value.description.toLowerCase().includes(search.toLowerCase())
     return abc;
   })
 
   const sortData = () => {
     if (orderSort === "asc") {
-      return [...filtedData].sort((a, b) => a.price - b.price)
+      let filteredCopy = [...filteredData]
+      return filteredCopy.sort((a, b) => a.price - b.price)
     }
 
     if (orderSort === "dec") {
-      return [...filtedData].sort((a, b) => b.price - a.price)
+      return [...filteredData].sort((a, b) => b.price - a.price)
     }
-    return filtedData
+    return filteredData
   }
 
 
@@ -45,22 +46,22 @@ const Api = () => {
       <h1 className="text-4xl font-bold text-center text-blue-600 mb-8 hover:text-blue-700 transition-colors">
         Product Catalog
       </h1>
-      
+
       <div className='flex justify-center gap-4 mb-8'>
-        <input 
+        <input
           type='text'
           placeholder='Search products...'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
         />
-        <button 
+        <button
           onClick={() => SetOrderSort('asc')}
           className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
         >
           Price: Low to High
         </button>
-        <button 
+        <button
           onClick={() => SetOrderSort('dec')}
           className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
         >
