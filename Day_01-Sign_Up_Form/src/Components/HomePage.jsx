@@ -19,7 +19,7 @@ const HomePage = () => {
           Fetch API Data
         </button>
       </Link>
-      <button onClick={localStorage.removeItem('user')} className="bg-red-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+      <button onClick={() => { localStorage.clear(); alert("Creditionals Cleared Successfully") }} className="bg-red-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
         Clear User Creditionals
       </button>
     </div>
