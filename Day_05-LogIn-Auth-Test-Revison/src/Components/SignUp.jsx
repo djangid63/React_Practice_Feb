@@ -18,16 +18,18 @@ const SignUp = () => {
       password,
       confirmPassword
     }
-
-    localStorage.setItem('user', JSON.stringify(data))
-    setfullName('')
-    setUsername('')
-    setfullName('')
-    setPassword('')
+    if (password != confirmPassword) {
+      alert("Password did not match")
+    } else {
+      localStorage.setItem('user', JSON.stringify(data))
+      setfullName('')
+      setUsername('')
+      setEmail('')
+      setPassword('')
+    }
 
 
   }
-
 
   return (
     <section className='flex flex-col justify-center items-center min-h-screen bg-gray-50 px-4'>
@@ -61,6 +63,7 @@ const SignUp = () => {
               onChange={(e) => setUsername(e.target.value)}
               className='py-2 px-3 rounded-md border border-gray-300 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 outline-none transition duration-200'
               placeholder='djangid'
+              autoComplete='new-username'
             />
           </div>
 
@@ -84,22 +87,24 @@ const SignUp = () => {
               name='password'
               type='password'
               value={password}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               className='py-2 px-3 rounded-md border border-gray-300 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 outline-none transition duration-200'
               placeholder='••••••••'
+              autoComplete='new-password'
             />
           </div>
 
           <div className='flex flex-col mb-6'>
-            <label htmlFor='password' className='text-sm font-semibold text-gray-600 mb-1'>Confirm Password</label>
+            <label htmlFor='confirmPassword' className='text-sm font-semibold text-gray-600 mb-1'>Confirm Password</label>
             <input
-              id='password'
-              name='password'
+              id='confirmPassword'
+              name='confirmPassword'
               type='password'
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               className='py-2 px-3 rounded-md border border-gray-300 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 outline-none transition duration-200'
               placeholder='••••••••'
+              autoComplete='new-password'
             />
           </div>
 
