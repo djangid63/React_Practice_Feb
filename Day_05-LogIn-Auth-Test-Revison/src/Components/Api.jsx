@@ -4,6 +4,8 @@ import axios from 'axios';
 const Api = () => {
 
   const [apiData, setApiData] = useState([])
+  const [orderSort, setOrderSort] = useState("")
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
 
@@ -15,11 +17,31 @@ const Api = () => {
       } catch (error) {
         console.log(error);
       }
-
     }
     fetchProducts()
-
   }, [])
+
+  const sortData = (products) => {
+    if (orderSort === "asc") {
+      return [...products].sort((a, b) => a.price - b.price)
+    }
+    else if (orderSort === "desc") {
+      return [...products].sort((a, b) => b.price - a.price)
+    }
+    return products
+  }
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value)
+  }
+
+  const searchData = (products) => {
+    if (!search) return products;
+    const searchResult = products.filter((item) =>
+      item.title.toLowerCase().includes(search.toLowerCase())
+    );
+    return searchResult
+  }
 
   return (
     <div className="bg-gray-100 min-h-screen py-12">
@@ -27,6 +49,21 @@ const Api = () => {
         <h1 className="text-3xl font-semibold text-gray-800 mb-8 text-center">
           Shopping Carts
         </h1>
+        <div className='flex justify-center space-x-4 mb-4'>
+          <button
+            onClick={() => setOrderSort("asc")}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Price Low to High
+          </button>
+          <button
+            onClick={() => setOrderSort("desc")}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Price High to Low
+          </button>
+          <input type="text" placeholder="Search..." onChange={handleSearch} className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {apiData.map((cart) => (
             <div
@@ -38,7 +75,7 @@ const Api = () => {
               </div>
               <div className="px-6 py-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {cart.products.map((product) => (
+                  {sortData(searchData(cart.products)).map((product) => (
                     <div
                       key={product.id}
                       className="bg-gray-50 rounded-lg p-4 flex flex-col justify-between"
