@@ -36,7 +36,7 @@ const Api = () => {
     }
 
     if (orderSort === "dec") {
-      // Making shallow copy of filteredData without storing it in any variable in this example in above example we are storing it in a varible there is no difference in output what so ever.
+      // Making shallow copy of filteredData without storing it in any variable in this example and in above example we are storing it in a varible there is no difference in output what so ever.
       return [...filteredData].sort((a, b) => b.price - a.price)
     }
     return filteredData
