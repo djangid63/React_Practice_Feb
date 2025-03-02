@@ -1,10 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const LogIn = () => {
   const [emailOrUsername, setEmailOrUsername] = useState("")
   const [password, setPassword] = useState("")
   const [alert, setAlert] = useState({ show: false, message: "", type: "" })
+  const navigateAPI = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -33,6 +35,9 @@ const LogIn = () => {
         message: "Login successful!",
         type: "success"
       })
+      setTimeout(() => {
+        navigateAPI("/api")
+      }, 1000);
       setEmailOrUsername('')
       setPassword('')
     } else {
