@@ -4,8 +4,9 @@ import axios from 'axios'
 import { data } from 'react-router-dom'
 
 const FakeStoreAPI = () => {
-  const [apiData, setApiData] = useState([""])
-  const [showData, setShowData] = useState()
+  const [apiData, setApiData] = useState([])
+  const [oneProduct, setOneProducts] = useState()
+  const [showProduct, setshowProduct] = useState(false)
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -16,12 +17,16 @@ const FakeStoreAPI = () => {
         console.log(error);
       }
     }
+
+
     fetchProducts()
   }, [])
 
   const handleViewMore = async (id) => {
     const getOne = await axios.get(`https://fakestoreapi.com/products/${id}`)
-    setShowData(getOne.data)
+    setOneProducts(getOne.data)
+    setshowProduct(true)
+    console.log(showProduct);
   }
 
   return (
@@ -38,8 +43,10 @@ const FakeStoreAPI = () => {
           </div>
         ))}
 
-        {showData && (
-          <ViewMore product={showData} />
+        {oneProduct && showProduct && (
+          <div >
+            <ViewMore key="viewMore" product={oneProduct} showProduct={showProduct} setshowProduct={setshowProduct} />
+          </div>
         )
         }
       </div>

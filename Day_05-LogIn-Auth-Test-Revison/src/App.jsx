@@ -7,14 +7,13 @@ import FakeStoreAPI from './Components/FakeStoreAPI'
 
 const App = () => {
 
-  const UserData = localStorage.getItem('user') ? true : false;
-  // console.log(UserData);
+  const userData = localStorage.getItem('user') ? true : false;
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<LogIn />} />
-        <Route path='/signup' element={<SignUp />} />
-        <Route path='/api' element={UserData ? <FakeStoreAPI /> : <SignUp />} />
+        <Route path='/' element={<SignUp />} />
+        <Route path='/login' element={<LogIn />} />
+        <Route path='/api' element={userData ? <FakeStoreAPI /> : <SignUp />} />
         <Route path='/*' element={<div>Page not found</div>} />
       </Routes>
     </BrowserRouter>

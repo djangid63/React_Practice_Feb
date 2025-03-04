@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const LogIn = () => {
   const [emailOrUsername, setEmailOrUsername] = useState("")
@@ -8,14 +9,20 @@ const LogIn = () => {
   const [alert, setAlert] = useState({ show: false, message: "", type: "" })
   const navigateAPI = useNavigate();
 
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem('user'))
+    if (userData && userData.username) {
+      setUsername(userData.username)
+    }
+  }, [])
+
   const handleSubmit = (e) => {
     e.preventDefault()
     const data = {
       emailOrUsername,
       password,
     }
-
-    const userData = JSON.parse(localStorage.getItem('user'))
+    let userData = JSON.parse(localStorage.getItem('user'))
 
     if (!userData) {
       setAlert({
@@ -56,7 +63,7 @@ const LogIn = () => {
   return (
     <section className='flex flex-col justify-center items-center min-h-screen bg-gray-50 px-4'>
       <div className='text-center mb-8'>
-        <h1 className='text-4xl font-bold text-gray-800 mb-2'>Welcome</h1>
+        <h1 className='text-4xl font-bold text-gray-800 mb-2'>Welcome {username ? `, ${username}` : ''} </h1>
         <h2 className='text-lg text-gray-600'>Come on and create an account</h2>
       </div>
 
@@ -72,6 +79,7 @@ const LogIn = () => {
               onChange={(e) => setEmailOrUsername(e.target.value)}
               className='py-2 px-3 rounded-md border border-gray-300 focus:border-pink-500 focus:ring-1 focus:ring-pink-500 outline-none transition duration-200'
               placeholder='Email or Username'
+              autoComplete='Email'
             />
           </div>
 
@@ -90,11 +98,9 @@ const LogIn = () => {
           </div>
 
           <div>
-            <Link to={"/api"}>
-              <button className='w-full bg-pink-600 text-white py-2 px-4 rounded-md hover:bg-pink-700 transition duration-200 font-semibold'>
-                Log In
-              </button>
-            </Link>
+            <button className='w-full bg-pink-600 text-white py-2 px-4 rounded-md hover:bg-pink-700 transition duration-200 font-semibold'>
+              Log In
+            </button>
 
           </div>
         </form>

@@ -1,8 +1,8 @@
 import React from 'react'
 
-const ViewMore = ({ product }) => {
+const ViewMore = ({ product, showProduct, setshowProduct }) => {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+    <div className={`fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 transition-transform duration-300 ${showProduct ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'}`} style={{ scroll: false }}>
       <div className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <img src={product.image} alt={product.title} className="h-64 w-full object-contain mb-4" />
         <h2 className="text-2xl font-bold mb-2">{product.title}</h2>
@@ -11,12 +11,13 @@ const ViewMore = ({ product }) => {
         <p className="text-sm text-gray-500 mb-4">Category: {product.category}</p>
 
         <button
+          onClick={() => { setshowProduct(false) }}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Close
         </button>
       </div>
-    </div>
+    </div >
   )
 }
 

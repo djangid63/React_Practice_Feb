@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-
+import { Link, useNavigate } from 'react-router-dom'
 const SignUp = () => {
 
   const [fullName, setfullName] = useState("")
@@ -8,6 +8,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+  const navigateToLogin = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -22,6 +23,9 @@ const SignUp = () => {
       alert("Password did not match")
     } else {
       localStorage.setItem('user', JSON.stringify(data))
+      if (data) {
+        navigateToLogin("/login")
+      }
       setfullName('')
       setUsername('')
       setEmail('')
