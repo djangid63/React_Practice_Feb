@@ -8,7 +8,6 @@ const Api = () => {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-
     const fetchProducts = async () => {
       try {
         const response = await axios.get('https://dummyjson.com/carts')
@@ -41,6 +40,13 @@ const Api = () => {
       item.title.toLowerCase().includes(search.toLowerCase())
     );
     return searchResult
+  }
+
+  const modelView = async (id) => {
+    // console.log(id);
+    let result = await axios.get(`https://dummyjson.com/carts/${id}`)
+    // console.log(result.product);
+
   }
 
   return (
@@ -93,6 +99,7 @@ const Api = () => {
                           ${product.price.toFixed(2)}
                         </p>
                       </div>
+                      <button className='text-sm' onClick={() => modelView(product.id)}>View Details</button>
                     </div>
                   ))}
                 </div>

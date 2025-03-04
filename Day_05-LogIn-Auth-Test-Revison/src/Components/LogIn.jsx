@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const LogIn = () => {
   const [emailOrUsername, setEmailOrUsername] = useState("")
@@ -90,9 +90,12 @@ const LogIn = () => {
           </div>
 
           <div>
-            <button className='w-full bg-pink-600 text-white py-2 px-4 rounded-md hover:bg-pink-700 transition duration-200 font-semibold'>
-              Sign Up
-            </button>
+            <Link to={"/api"}>
+              <button className='w-full bg-pink-600 text-white py-2 px-4 rounded-md hover:bg-pink-700 transition duration-200 font-semibold'>
+                Log In
+              </button>
+            </Link>
+
           </div>
         </form>
 
