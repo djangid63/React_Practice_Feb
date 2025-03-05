@@ -27,7 +27,7 @@ const LogIn = () => {
     if (!userData) {
       setAlert({
         show: true,
-        message: "Please create an account to continue",
+        message: "Please create an account to ",
         type: "error"
       })
       return
