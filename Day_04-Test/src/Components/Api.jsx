@@ -11,6 +11,7 @@ const Api = () => {
   const [orderSort, SetOrderSort] = useState("");
 
   const userData = JSON.parse(localStorage.getItem('user'));
+  console.log(userData);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -46,6 +47,7 @@ const Api = () => {
       <h1 className="text-5xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 mb-10">
         Premium Products
       </h1>
+
 
       <div className='flex flex-col sm:flex-row justify-center gap-4 mb-12 px-4'>
         <input
