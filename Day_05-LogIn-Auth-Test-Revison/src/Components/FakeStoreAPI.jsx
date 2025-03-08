@@ -109,6 +109,14 @@ const FakeStoreAPI = () => {
                   Price: High to Low
                 </span>
               </button>
+              <button
+                className={`bg-gray-800 hover:bg-gray-700 text-gray-200 font-medium py-2 px-4 rounded-lg transition-all duration-300 border border-purple-700`}
+              >
+                <span className="flex items-center">
+
+                  Cart :
+                </span>
+              </button>
             </div>
           </div>
 
