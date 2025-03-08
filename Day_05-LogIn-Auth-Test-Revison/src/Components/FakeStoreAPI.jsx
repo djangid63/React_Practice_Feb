@@ -10,6 +10,28 @@ const FakeStoreAPI = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [sortOrder, setsortOrder] = useState('')
+  const [cartValue, setcartValue] = useState([])
+  // const [abc, setAbc] = useState([])
+
+  // let initailVal = 0;
+  // const increment = () => {
+  //   initailVal++;
+
+
+  // const data = cartValue.push(initailVal)
+  // setAbc(data)
+  // }
+
+  // const decrement = () => {
+  //   const data = cartValue.pop()
+  //   setAbc(data)
+  // }
+
+  const addToCart = async (id) => {
+    const count = await axios.get(`https://fakestoreapi.com/products/${id}`);
+    setcartValue((preVal) => [...preVal, count.data])
+  }
+
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -109,14 +131,13 @@ const FakeStoreAPI = () => {
                   Price: High to Low
                 </span>
               </button>
-              <button
+              <div
                 className={`bg-gray-800 hover:bg-gray-700 text-gray-200 font-medium py-2 px-4 rounded-lg transition-all duration-300 border border-purple-700`}
               >
                 <span className="flex items-center">
-
-                  Cart :
+                  {cartValue.length}
                 </span>
-              </button>
+              </div>
             </div>
           </div>
 
@@ -157,6 +178,13 @@ const FakeStoreAPI = () => {
                   <h2 className="text-lg font-semibold mb-2 text-gray-100 line-clamp-2">{val.title}</h2>
                   <div className="mt-auto">
                     <div className="text-2xl font-bold mb-3 text-purple-400">${val.price.toFixed(2)}</div>
+                    <button onClick={() => addToCart(val.id)}
+                      className={`bg-gray-800 hover:bg-gray-700 text-gray-200 font-medium py-2 px-6 rounded-lg transition-all duration-300 border border-purple-700`}
+                    >
+                      <span className="flex items-center">
+                        Add to Cart
+                      </span>
+                    </button>
                     <button
                       onClick={() => handleViewMore(val.id)}
                       className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 flex items-center justify-center"
