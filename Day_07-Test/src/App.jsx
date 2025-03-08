@@ -1,9 +1,10 @@
 import React from 'react'
+import Api from './Component/Api'
 
 const App = () => {
   return (
     <div>
-      <h1 className=''>hiii</h1>
+      <Api />
     </div>
   )
 }
