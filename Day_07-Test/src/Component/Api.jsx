@@ -12,7 +12,9 @@ const Api = () => {
   const navigateToCart = useNavigate()
 
   const handleCart = () => {
-    navigateToCart('/cart')
+    navigateToCart('/cart', {
+      state: { cartItems: cartValue }
+    });
   }
 
   // const [val, setVal] = useState([])
@@ -78,7 +80,7 @@ const Api = () => {
         <div>
           <div className='flex gap-10'>
             <div className="text-lg font-bold mb-4 text-blue-400">Cart Items: {cartValue.length}</div>
-            <button className="text-lg font-bold mb-4 text-blue-400 border border-gray-400 rounded-md px-6 py-1">Go To Cart</button>
+            <button onClick={handleCart} className="text-lg font-bold mb-4 text-blue-400 border border-gray-400 rounded-md px-6 py-1">Go To Cart</button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {data.map((item) => (
