@@ -2,11 +2,19 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const Api = () => {
   const [data, setData] = useState([''])
   const [isLoading, setIsLoading] = useState(true)
   const [cartValue, setCartValue] = useState([])
+
+  const navigateToCart = useNavigate()
+
+  const handleCart = () => {
+    navigateToCart('/cart')
+  }
+
   // const [val, setVal] = useState([])
   // const [reVal, setReVal] = useState()
 
@@ -18,6 +26,8 @@ const Api = () => {
     }
     fetchData()
   }, [])
+
+
 
   // let initalVal = 0;
   // const increment = () => {
@@ -52,7 +62,7 @@ const Api = () => {
       // console.log("-----FindItem------", findItem);
 
       newArr.length > 0 ? newArr.splice(newItem, 1) : alert("Cart Cannot be in Negative Number")
-      console.log("------Removed-------", newArr);
+      // console.log("------Removed-------", newArr);
       return newArr
 
     })
@@ -66,7 +76,10 @@ const Api = () => {
         </div>
       ) : (
         <div>
-          <div className="text-lg font-bold mb-4 text-blue-400">Cart Items: {cartValue.length}</div>
+          <div className='flex gap-10'>
+            <div className="text-lg font-bold mb-4 text-blue-400">Cart Items: {cartValue.length}</div>
+            <button className="text-lg font-bold mb-4 text-blue-400 border border-gray-400 rounded-md px-6 py-1">Go To Cart</button>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {data.map((item) => (
               <div key={item.id} className="flex flex-col justify-center items-center border border-gray-700 p-4 rounded shadow-md bg-gray-800">
