@@ -12,7 +12,11 @@ const Cart = () => {
 
   const removeFromCart = (id) => {
     setCartItems((prevItems) => {
-      return prevItems.filter((item) => item.id !== id);
+      
+      const newArr = [...prevItems]
+      const findRemove = newArr.find((item) => item.id == id);
+      newArr.splice(findRemove.id, 1);
+      return newArr
     });
   }
 
