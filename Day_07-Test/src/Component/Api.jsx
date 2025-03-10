@@ -9,6 +9,13 @@ const Api = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [cartValue, setCartValue] = useState([])
 
+  // Local Storage 
+
+  const [localVar, setLocalVar] = useState([]);
+
+
+  localStorage.setItem('item', JSON.stringify(localVar))
+
   const navigateToCart = useNavigate()
 
   const handleCart = () => {
@@ -16,6 +23,8 @@ const Api = () => {
       state: { cartItems: cartValue }
     });
   }
+
+
 
   // const [val, setVal] = useState([])
   // const [reVal, setReVal] = useState()
@@ -50,6 +59,7 @@ const Api = () => {
   const addToCart = async (id) => {
     const apiData = await axios.get(`https://fakestoreapi.com/products/${id}`)
     setCartValue((preVal) => [...preVal, apiData.data])
+    setLocalVar((preVal) => [...preVal, apiData.data])
     console.log("-----------Added---------", cartValue);
   }
 
@@ -60,7 +70,7 @@ const Api = () => {
 
       // let findItem = newArr.indexOf(apiData.id);
 
-      let newItem = newArr.filter((val) => val.id === apiData.id)
+      let newItem = newArr.find((val) => val.id === apiData.id)
       // console.log("-----FindItem------", findItem);
 
       newArr.length > 0 ? newArr.splice(newItem, 1) : alert("Cart Cannot be in Negative Number")

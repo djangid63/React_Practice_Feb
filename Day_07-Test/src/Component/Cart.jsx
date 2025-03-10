@@ -10,12 +10,15 @@ const Cart = () => {
     setCartItems(getCartItems);
   }, [location]);
 
+  
   const removeFromCart = (id) => {
     setCartItems((prevItems) => {
-      
+
       const newArr = [...prevItems]
       const findRemove = newArr.find((item) => item.id == id);
-      newArr.splice(findRemove.id, 1);
+      console.log("-------Find Remove------", findRemove);
+      const a = newArr.splice(findRemove.id, 1);
+      console.log("-------A----------", a);
       return newArr
     });
   }
