@@ -73,6 +73,8 @@ const Api = () => {
       let newItem = newArr.find((val) => val.id === apiData.id)
       // console.log("-----FindItem------", findItem);
 
+      localStorage.setItem('item', JSON.stringify(newArr))
+
       newArr.length > 0 ? newArr.splice(newItem, 1) : alert("Cart Cannot be in Negative Number")
       // console.log("------Removed-------", newArr);
       return newArr

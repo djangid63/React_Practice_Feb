@@ -6,28 +6,25 @@ const Cart = () => {
   const [storageCart, setStorageCart] = useState([])
   const location = useLocation();
 
-  let storageData = JSON.parse(localStorage.getItem('item')) || [];
+  JSON.parse(localStorage.getItem('item'))
 
   useEffect(() => {
     const getCartItems = location.state?.cartItems || [];
-    JSON.parse(localStorage.getItem('item'))
     setStorageCart(storageCart)
     setCartItems(getCartItems);
   }, [location]);
-
-
 
 
   const removeDataFromStorage = (id) => {
     setCartItems((preVal) => {
       const newArr = [...preVal];
       const findTheIndex = newArr.findIndex((val) => val.id === id);
+      localStorage.setItem('item', JSON.stringify(newArr))
       newArr.splice(findTheIndex, 1);
       return newArr
     }
     )
   }
-
 
 
   const removeFromCart = (id) => {
@@ -36,9 +33,7 @@ const Cart = () => {
       const findRemove = newArr.findIndex((item) => item.id == id);
       console.log("-------Find Remove------", findRemove);
       const a = newArr.splice(findRemove, 1);
-
       localStorage.setItem('item', JSON.stringify(newArr))
-
       console.log("-------A----------", a);
       return newArr
     });
