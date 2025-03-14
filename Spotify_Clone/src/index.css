@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+:root {
+  --color-primary: #8b5cf6; /* Purple for light mode */
+  --color-background: #ffffff; /* White for light mode */
+  --color-surface: #f3f4f6; /* Light gray for light mode */
+  --color-text: #111827; /* Dark gray for light mode */
+}
+
+.dark {
+  --color-primary: #a78bfa; /* Lighter purple for dark mode */
+  --color-background: #121212; /* Dark gray for dark mode */
+  --color-surface: #1f1f1f; /* Darker gray for dark mode */
+  --color-text: #f9fafb; /* Light gray for dark mode */
+}
