@@ -14,7 +14,9 @@ const HomePage = () => {
         <div className="flex items-center justify-between col-span-10 row-span-1 border-b-2 border-gray-300"> <NavBar /> </div>
 
         {/* Main Content */}
-        <div className="col-span-10 row-span-8 sm:row-span-6 bg-red-300"><API /></div>
+        <div className="col-span-10 row-span-8 sm:row-span-6 bg-red-300">
+          {/* <API /> */}
+        </div>
 
         {/* BottomBar */}
         <div className="col-span-11 row-span-8 border-t-2 border-gray-300">4</div>

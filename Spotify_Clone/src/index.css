@@ -2,6 +2,7 @@
 
 @theme {
   --color-primary: #e7e4eb; /* Purple for light mode */
+  --color-prPrimary: #a78bfa; /* Lighter purple for dark mode */
   --color-background: #FDFDFF; /* White for light mode */
   --color-surface: #f3f4f6; /* Light gray for light mode */
   --color-text: #111827; /* Dark gray for light mode */
