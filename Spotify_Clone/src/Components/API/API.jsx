@@ -16,11 +16,14 @@ const App = () => {
         const options = {
           method: 'GET',
           url: 'https://saavn.dev/api/search/songs',
-          params: { query: 'Bollywood' }
+          params: { query: 'Bollywood', limit: 50 },
+
         };
 
         const { data } = await axios.request(options);
         setSearchResults(data.data.results || []);
+        console.log(data.data.results);
+        console.log('hoo');
       } catch (error) {
         setError('Failed to fetch songs');
       } finally {
