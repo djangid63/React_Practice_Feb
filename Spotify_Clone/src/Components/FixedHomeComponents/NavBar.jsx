@@ -4,7 +4,6 @@ import { FaRegBell } from "react-icons/fa";
 import { SearchContext } from '../UseContext/SearchContext';
 
 const NavBar = () => {
-  // Use context directly without custom hook
   const { search, setSearch } = useContext(SearchContext);
   
   return (

@@ -1,30 +1,41 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import { SearchContext } from '../UseContext/SearchContext';
 import { FaRegHeart } from "react-icons/fa";
 import { CiCirclePlus } from "react-icons/ci";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { PiSpeakerHighDuotone } from "react-icons/pi";
 import { HiOutlineSpeakerXMark } from "react-icons/hi2";
 import { TbMusicCog } from "react-icons/tb";
-import { CgChevronDoubleLeftO } from "react-icons/cg";
 import { IoPlayOutline } from "react-icons/io5";
 import { PiShuffleLight } from "react-icons/pi";
 import { IoIosRepeat } from "react-icons/io";
 import { RxTrackNext } from "react-icons/rx";
 import { RxTrackPrevious } from "react-icons/rx";
 
+
 const MusicPlayer = () => {
+  const { currentTrack } = useContext(SearchContext)
+  // Play the track when it changes
+  useEffect(() => {
+    if (currentTrack && audioRef.current) {
+      audioRef.current.play().catch(e => console.error('Playback failed:', e));
+    }
+  }, [currentTrack]);
+
+  // if (!currentTrack) return null; // Don't render if no track is selected
+
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-gray-100 h-16 sm:h-23 flex items-center justify-between px-4 border-t-2 border-gray-300">
       {/* Left: Track Information */}
       <div className="flex items-center space-x-2">
-        {/* <img
-          src="https://via.placeholder.com/40"
+        <img
+          // src={currentTrack.image}
           alt="Album cover"
           className="w-10 h-10 rounded"
-        /> */}
+        />
         <div>
-          {/* <p className="text-sm font-semibold text-black">Abracadabra</p>
-          <p className="text-xs text-gray-600">Lady Gaga</p> */}
+          {/* <p className="text-sm font-semibold text-black">{currentTrack.title}</p>
+          <p className="text-xs text-gray-600">{currentTrack.artist}</p> */}
         </div>
         <div className="flex space-x-2">
           <FaRegHeart className="w-3 h-3 sm:w-5 sm:h-5 text-black" />
@@ -37,7 +48,6 @@ const MusicPlayer = () => {
           <PiShuffleLight className="w-3 h-3 sm:w-5 sm:h-5 text-black" />
           <RxTrackPrevious className="w-3 h-3 sm:w-5 sm:h-5 text-black" />
           <div className="w-5 sm:w-10 h-5 sm:h-10 bg-purple-500 rounded-full flex items-center justify-center text-center">
-            {/* <FaPlayCircle   /> */}
             <IoPlayOutline className="sm:w-6 sm:h-6 text-center text-white pl-0.5" />
 
           </div>
