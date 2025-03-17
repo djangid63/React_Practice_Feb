@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { MdSearch } from "react-icons/md";
 import { FaRegBell } from "react-icons/fa";
-
+import { SearchContext } from '../UseContext/SearchContext';
 
 const NavBar = () => {
-  const [search, setSearch] = useState('')
+  // Use context directly without custom hook
+  const { search, setSearch } = useContext(SearchContext);
+  
   return (
     <nav className='w-full' >
       <div className='flex justify-between items-center my-[6px] mx-2 sm:m-3 sm:mx-6 '>

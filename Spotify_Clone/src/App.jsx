@@ -1,11 +1,14 @@
 import React from 'react'
 import HomePage from './Pages/HomePage'
+import { SearchProvider } from '../src/Components/UseContext/SearchContext';
 
 const App = () => {
   return (
-    <div className='overflow-x-hidden'>
-      <HomePage />
-    </div>
+    <SearchProvider>
+      <div className='overflow-x-hidden'>
+        <HomePage />
+      </div>
+    </SearchProvider>
   )
 }
 
