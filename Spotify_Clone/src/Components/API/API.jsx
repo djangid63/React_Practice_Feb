@@ -65,7 +65,7 @@ const App = () => {
   };
 
   return (
-    <div className="p-4 bg-white text-black min-h-screen">
+    <div className="p-4 bg-white text-black min-h-screen ">
       <h2 className="text-2xl mb-4">Music Player</h2>
       {loading && <p>Loading songs...</p>}
       <ul className="space-y-4">
