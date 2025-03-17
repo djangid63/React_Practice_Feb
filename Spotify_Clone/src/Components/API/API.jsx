@@ -45,19 +45,19 @@ const App = () => {
   };
 
   return (
-    <div className="p-4 bg-gray-900 text-white min-h-screen">
+    <div className="p-4 bg-white text-black min-h-screen">
       <h2 className="text-2xl mb-4">Music Player</h2>
       {loading && <p>Loading songs...</p>}
       {error && <p className="text-red-500">{error}</p>}
       <ul className="space-y-4">
         {searchResults.map((song) => (
-          <li key={song.id} className="flex items-center space-x-4 cursor-pointer" onClick={() => playSong(song)}>
+          <li key={song.id} className="flex items-center space-x-4 cursor-pointer " onClick={() => playSong(song)}>
             <img
-              src={song.image[0]?.url}
+              src={song.image[2]?.url}
               alt={song.name}
               className="w-12 h-12 rounded"
             />
-            <span className="text-white">{song.name}</span>
+            <span className="text-black">{song.name}</span>
           </li>
         ))}
       </ul>

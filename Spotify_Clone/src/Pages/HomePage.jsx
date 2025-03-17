@@ -7,7 +7,7 @@ import API from '../Components/API/API'
 const HomePage = () => {
   return (
     <section>
-      <div className="w-screen h-screen grid grid-cols-10 grid-rows-10 md:grid-rows-8 md:grid-cols-10 gap-0 ">
+      <div className="w-screen h-screen grid grid-cols-10 grid-rows-10 md:grid-rows-8 md:grid-cols-6 gap-0 overflow-x-hidden">
         {/* SideBar */}
         <div className="w-full row-span-9 sm:row-span-7 bg-primary border-r-2 border-gray-300"><SideBar /></div>
 

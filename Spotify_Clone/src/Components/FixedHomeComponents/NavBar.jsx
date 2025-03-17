@@ -8,9 +8,9 @@ const NavBar = () => {
   return (
     <nav className='w-full' >
       <div className='flex justify-between items-center my-[6px] mx-2 sm:m-3 sm:mx-6 '>
-        <div className='flex items-center justify-between rounded-md focus-within:border-purple-400 bg-primary shadow-sm'>
+        <div className='flex items-center justify-start rounded-md focus-within:border-purple-400 bg-primary shadow-sm'>
           <label htmlFor='search' className='sr-only'>Search</label>
-          <MdSearch className="mx-1 mt-1 text-gray-400 size-5" />
+          <MdSearch className="ml-2 mt-1 text-gray-500 sm:size-6 size-5" />
           <input
             type='text'
             id='search'
@@ -18,7 +18,7 @@ const NavBar = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder='Artists, titles, podcasts...'
-            className='sm:w-80 w-32 md:px-4 md:py-2 px-[1px] py-[1px] focus:outline-none bg-transparent sm:placeholder:text-base placeholder:text-xs rounded-full'
+            className='sm:w-80 w-32 md:px-4 md:py-2 px-[1px] py-[1px] focus:outline-none bg-transparent sm:placeholder:text-base placeholder:text-xs rounded-full font-bold font-mono'
           />
         </div>
         <div className='flex justify-center items-center gap-5'>
