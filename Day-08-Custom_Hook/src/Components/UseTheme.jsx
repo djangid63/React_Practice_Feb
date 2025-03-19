@@ -5,14 +5,6 @@ const UseTheme = () => {
 
 
   const toggleIsDark = () => {
-    // if (!isDark) {
-    //   document.documentElement.classList.add('dark');
-    //   setIsDark(true);
-    // } else {
-    //   document.documentElement.classList.remove('dark');
-    //   setIsDark(false);
-    // }
-
     setIsDark(!isDark)
   }
 
