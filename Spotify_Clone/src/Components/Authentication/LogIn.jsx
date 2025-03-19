@@ -25,11 +25,20 @@ const LogIn = () => {
     SetPassword('');
   }
 
+  const logOut = () => {
+    localStorage.clear()
+  }
+
   return (
-    <div className='overflow-x-hidden min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 '>
+    <div className='overflow-x-hidden min-h-screen bg-gradient-to-b from-gray-50 to-gray-100'>
       <nav className='w-full flex items-center justify-start lg:px-56 px-5 py-4 gap-5 border-b border-gray-200 bg-white shadow-sm'>
-        <span><TiHeartOutline className='size-10 text-purple-600' /></span>
-        <h1 className='text-2xl font-mono font-bold text-gray-800'>Dezzer</h1>
+        <div className='flex items-center justify-center gap-5'>
+          <span><TiHeartOutline className='text-5xl text-purple-600' /></span>
+          <h1 className='text-2xl font-mono font-bold text-gray-800'>Dezzer</h1>
+        </div>
+        <button onClick={logOut} className='ml-auto bg-purple-600 text-white font-medium py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 shadow-sm'>
+          Log out
+        </button>
       </nav>
       <div className='max-w-md mx-auto mt-12 px-4'>
         <h1 className='text-3xl font-bold text-center text-gray-800 mb-6'>Enter Your Email</h1>
@@ -58,7 +67,7 @@ const LogIn = () => {
                 type='password'
                 autoComplete='current-password'
                 value={password}
-                placeholder='Create a password'
+                placeholder='Enter your password'
                 onChange={(e) => SetPassword(e.target.value)}
                 className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all'
               />
