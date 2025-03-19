@@ -2,7 +2,7 @@ import React from 'react'
 import NavBar from '../Components/FixedHomeComponents/NavBar'
 import SideBar from '../Components/FixedHomeComponents/SideBar'
 import API from '../Components/API/API'
-import MusicPlayer from './../Components/FixedHomeComponents/MusicPlayer';
+import MusicPlayer from '../Components/FixedHomeComponents/MusicControl';
 
 const HomePage = () => {
   return (
@@ -18,7 +18,7 @@ const HomePage = () => {
 
         {/* ------------Main Content ------------- */}
         <div className="col-span-10 row-span-8 sm:row-span-6 absolute top-15 left-60 right-0 ">
-          {/* <API /> */}
+          <API />
         </div>
 
         {/*-------------- BottomBar ----------- */}

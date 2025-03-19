@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import axios from 'axios';
 import { SearchContext } from '../UseContext/SearchContext';
+import { FaRegHeart } from "react-icons/fa";
 const App = () => {
   const { search, setCurrentTrack } = useContext(SearchContext);
 
@@ -54,38 +55,51 @@ const App = () => {
   }, [search])
 
   const playSong = (song) => {
-    const highestQuality = song.downloadUrl?.find((file) => file.quality === '320kbps') || song.downloadUrl[0];
+    const highestQuality = song.downloadUrl?.find((file) => file.quality === '320kbps') || song.url;
     setCurrentTrack({
       url: highestQuality.url,
       title: song.name,
-      artist: song.primaryArtists,
-      image: song.image[2]?.url
+      artist: song.primaryArtists || "Unknown",
+      image: song.image[2]?.url || song.image,
     });
-
   };
 
+  const getFavoritesList = JSON.parse(localStorage.getItem('favorites'))
+  console.log(getFavoritesList);
+
   return (
-    <div className="p-4 bg-white text-black min-h-screen ">
-      <h2 className="text-2xl mb-4">Music Player</h2>
-      {loading && <p>Loading songs...</p>}
-      <ul className="space-y-4">
-        {songs.map((song) => (
-          <li key={song.id} className="flex items-center space-x-4 cursor-pointer " onClick={() => playSong(song)}>
-            <img
-              src={song.image[2]?.url}
-              alt={song.name}
-              className="w-12 h-12 rounded"
-            />
-            <span className="text-black">{song.name}</span>
-          </li>
-        ))}
-      </ul>
-      {/* {currentTrack && (
-        <audio controls autoPlay className="mt-4 w-20">
-          <source src={currentTrack} type="audio/mp4" />
-          Your browser does not support the audio element.
-        </audio>
-      )} */}
+    <div className="p-4 bg-white text-black min-h-screen">
+      <h2 className="text-2xl mb-4 transition-all duration-300 hover:text-indigo-600">Music Player</h2>
+      {loading ? (
+        <div className="flex items-center justify-center py-8">
+          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-indigo-500"></div>
+          <span className="ml-3">Loading songs...</span>
+        </div>
+      ) : (
+        <ul className="space-y-4">
+          {getFavoritesList.map((song) => (
+            <li
+              key={song.id}
+              className="flex items-center justify-between space-x-4 cursor-pointer p-3 rounded-lg transition-all duration-300 hover:bg-gray-100 hover:shadow-md transform hover:-translate-y-1"
+              onClick={() => playSong(song)}
+            >
+              <div className='flex items-center justify-center gap-5'>
+                <img
+                  src={song.image[2]?.url || song.image }
+                  alt={song.name || song.title}
+                  className="w-12 h-12 rounded transition-transform duration-300 hover:scale-110"
+                />
+
+                <span className="text-black transition-colors duration-300 hover:text-indigo-600">{song.name || song.title}</span>
+              </div>
+              <div>
+                {/* <button><FaRegHeart className='size-5' /></button> */}
+              </div>
+
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

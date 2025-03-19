@@ -13,8 +13,8 @@ const LogIn = () => {
 
     const userData = JSON.parse(localStorage.getItem('user'))
     if (email === userData.email && password === userData.password) {
-      navigateToPlayer('/Homepage')
       alert("Log In successfull!");
+      navigateToPlayer('/Homepage')
     }
     else {
       alert("Please Check Your Password or Email")
