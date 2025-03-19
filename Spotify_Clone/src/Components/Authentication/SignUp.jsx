@@ -47,6 +47,7 @@ const SignUp = () => {
                 id='fullname'
                 name='fullname'
                 type='text'
+                autoComplete='fullname'
                 value={fullName}
                 placeholder='Enter your full name'
                 onChange={(e) => setfullName(e.target.value)}
@@ -61,6 +62,7 @@ const SignUp = () => {
                 name='email'
                 type='email'
                 value={email}
+                autoComplete='email'
                 placeholder='Enter your email'
                 onChange={(e) => setEmail(e.target.value)}
                 className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all'
@@ -73,6 +75,7 @@ const SignUp = () => {
                 id='password'
                 name='password'
                 type='password'
+                autoComplete='current-password'
                 value={password}
                 placeholder='Create a password'
                 onChange={(e) => SetPassword(e.target.value)}

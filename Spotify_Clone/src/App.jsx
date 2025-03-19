@@ -6,13 +6,18 @@ import SignUp from './Components/Authentication/SignUp';
 import LogIn from './Components/Authentication/LogIn';
 
 const App = () => {
+
+  const userData = JSON.parse(localStorage.getItem('user'))
+
+
+
   return (
     <BrowserRouter>
-      <SignUp />
       <SearchProvider>
         <Routes>
-          <Route path='/Homepage' element={<HomePage />} />
-          <Route path='/login' element={<LogIn />}/>
+          <Route path='/' element={<SignUp />} />
+          <Route path='/login' element={<LogIn />} />
+          <Route path='/Homepage' element={userData ? <HomePage /> : alert("Please Log In to Play Music")} />
         </Routes>
       </SearchProvider>
     </BrowserRouter>

@@ -1,13 +1,26 @@
-import React ,{useState} from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { TiHeartOutline } from "react-icons/ti";
 
 const LogIn = () => {
   const [email, setEmail] = useState('')
   const [password, SetPassword] = useState('')
+  const navigateToPlayer = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    alert("Log In successfull!");
+
+    const userData = JSON.parse(localStorage.getItem('user'))
+    if (email === userData.email && password === userData.password) {
+      navigateToPlayer('/Homepage')
+      alert("Log In successfull!");
+    }
+    else {
+      alert("Please Check Your Password or Email")
+    }
+
+
     setEmail('');
     SetPassword('');
   }
@@ -24,25 +37,13 @@ const LogIn = () => {
           <h2 className='text-2xl font-bold mb-6 text-center text-gray-800'>Log In</h2>
           <form className='space-y-5' onSubmit={handleSubmit}>
             <div>
-              <label htmlFor='fullname' className='block text-sm font-medium text-gray-700 mb-1'>Full Name</label>
-              <input
-                id='fullname'
-                name='fullname'
-                type='text'
-                value={fullName}
-                placeholder='Enter your full name'
-                onChange={(e) => setfullName(e.target.value)}
-                className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all'
-              />
-            </div>
-
-            <div>
               <label htmlFor='email' className='block text-sm font-medium text-gray-700 mb-1'>Email</label>
               <input
                 id='email'
                 name='email'
                 type='email'
                 value={email}
+                autoComplete='email'
                 placeholder='Enter your email'
                 onChange={(e) => setEmail(e.target.value)}
                 className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all'
@@ -55,6 +56,7 @@ const LogIn = () => {
                 id='password'
                 name='password'
                 type='password'
+                autoComplete='current-password'
                 value={password}
                 placeholder='Create a password'
                 onChange={(e) => SetPassword(e.target.value)}
