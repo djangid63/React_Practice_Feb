@@ -1,34 +1,16 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { TiHeartOutline } from "react-icons/ti";
+import React ,{useState} from 'react'
 
-
-const SignUp = () => {
-  const [fullName, setfullName] = useState('')
+const LogIn = () => {
   const [email, setEmail] = useState('')
   const [password, SetPassword] = useState('')
-  const navigateToLogInPage = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const data = {
-      fullName,
-      email,
-      password
-    }
-
-    localStorage.setItem('user', JSON.stringify(data))
-    alert("Account created successfully!");
-
-
-    setfullName('');
+    alert("Log In successfull!");
     setEmail('');
     SetPassword('');
-    navigateToLogInPage('/login')
   }
-
-
 
   return (
     <div className='overflow-x-hidden min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 '>
@@ -37,9 +19,9 @@ const SignUp = () => {
         <h1 className='text-2xl font-mono font-bold text-gray-800'>Dezzer</h1>
       </nav>
       <div className='max-w-md mx-auto mt-12 px-4'>
-        <h1 className='text-3xl font-bold text-center text-gray-800 mb-6'>Create Your Account</h1>
+        <h1 className='text-3xl font-bold text-center text-gray-800 mb-6'>Enter Your Email</h1>
         <div className='bg-white rounded-lg shadow-lg p-8 border border-gray-100'>
-          <h2 className='text-2xl font-bold mb-6 text-center text-gray-800'>Sign Up</h2>
+          <h2 className='text-2xl font-bold mb-6 text-center text-gray-800'>Log In</h2>
           <form className='space-y-5' onSubmit={handleSubmit}>
             <div>
               <label htmlFor='fullname' className='block text-sm font-medium text-gray-700 mb-1'>Full Name</label>
@@ -84,7 +66,7 @@ const SignUp = () => {
               type='submit'
               className='w-full bg-purple-600 text-white font-medium py-3 px-4 rounded-md hover:bg-purple-700 transition duration-300 mt-8 shadow-sm'
             >
-              Sign Up
+              Log In
             </button>
           </form>
         </div>
@@ -93,4 +75,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default LogIn
