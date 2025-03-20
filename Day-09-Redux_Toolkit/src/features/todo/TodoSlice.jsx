@@ -21,11 +21,17 @@ export const todoSlice = createSlice({
     },
 
     updateTodo: (state, action) => {
-      state.todo = state.todo.map((todo) =>
-        todo.id === action.payload.id
-          ? { ...todo, text: action.payload.text }
-          : todo
-      )
+      state.todo = state.todo.map((todo) => {
+        // todo.id === action.payload.id
+        //   ? { text: action.payload.text }
+        //   : todo
+
+        if (todo.id === action.payload.id) {
+          return { ...todo, text: action.payload.text }
+        } else {
+          return { todo }
+        }
+      })
     }
   }
 })
