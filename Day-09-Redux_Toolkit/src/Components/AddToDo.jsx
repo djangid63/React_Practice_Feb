@@ -12,8 +12,6 @@ function AddTodo() {
     setInput('');
   }
 
-
-
   return (
     <div className="flex items-center justify-between space-x-3 bg-gray-800 p-4 rounded-lg shadow-md mx-96 pt-2">
       <form onSubmit={addTodoHandler} className='flex items-center justify-between gap-96' >
