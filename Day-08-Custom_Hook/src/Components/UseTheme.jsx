@@ -9,7 +9,7 @@ const UseTheme = () => {
   }
 
   return {
-    isDark, toggleIsDark, black, white
+    isDark, toggleIsDark
   }
 }
 

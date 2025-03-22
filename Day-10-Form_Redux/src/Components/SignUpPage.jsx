@@ -24,7 +24,7 @@ const SignUpPage = () => {
     console.log(email, password, firstName, lastName);
     dispatch(addData({ email, password, firstName, lastName }))
 
-    navigate("/Home")
+    navigate("/loginPage")
     // localStorage.setItem('user', JSON.stringify(data));
     setEmail('');
     setPassword('');

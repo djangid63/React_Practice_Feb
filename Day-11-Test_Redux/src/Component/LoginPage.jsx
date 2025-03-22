@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
-
-
+import Content from './Content';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -31,6 +29,7 @@ const LoginPage = () => {
     }
     if (storedEmail === data.email && storedPassword === data.password) {
       alert('Login Successful')
+      navigate("/Content")
     }
     else {
       alert('Invalid Credentials')
@@ -39,8 +38,6 @@ const LoginPage = () => {
     setPassword('');
 
   };
-
-
 
   return (
 
