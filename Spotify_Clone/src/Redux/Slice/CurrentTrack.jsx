@@ -4,12 +4,12 @@ export const trackSlice = createSlice({
 
   name: "track",
   initialState: {
-    song: []
+    songs: []
   },
   reducers: {
     addTrack: (state, action) => {
 
-      state.song = action.payload
+      state.songs = action.payload
       // return action.payload;
     }
   }
