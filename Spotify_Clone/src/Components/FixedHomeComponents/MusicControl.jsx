@@ -97,7 +97,6 @@ const MusicPlayer = () => {
         </div>
         <div className="flex space-x-2">
           <FaRegHeart onClick={handleFavorites} className="w-3 h-3 sm:w-5 sm:h-5 text-black transition-transform duration-300 hover:scale-125 hover:text-red-500 cursor-pointer" />
-          {/* <CiCirclePlus className="w-3 h-3 sm:w-5 sm:h-5 text-black transition-transform duration-300 hover:scale-125 hover:text-blue-500 cursor-pointer" /> */}
         </div>
       </div>
 

@@ -2,6 +2,10 @@ import React, { useEffect, useState, useRef, useContext } from 'react';
 import axios from 'axios';
 import { SearchContext } from '../UseContext/SearchContext';
 import { FaRegHeart } from "react-icons/fa";
+import { useDispatch } from 'react-redux';
+import { addToFav } from '../../Redux/Slice/Favorite'
+
+
 const App = () => {
   const { search, setCurrentTrack } = useContext(SearchContext);
 
@@ -9,6 +13,7 @@ const App = () => {
   const [songs, setSongs] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const debounceTimeout = useRef(null);
+  const dispatch = useDispatch()
 
   // Filter songs when search changes
   useEffect(() => {
@@ -36,9 +41,7 @@ const App = () => {
       };
       const { data } = await axios.request(options);
       setSearchResults(data.data.results);
-      setSongs(data.data.results);
       setLoading(false)
-      console.log(data.data.results);
 
     } catch (error) {
       console.log('Failed to fetch songs');
@@ -64,8 +67,6 @@ const App = () => {
     });
   };
 
-  const getFavoritesList = JSON.parse(localStorage.getItem('favorites'))
-  console.log(getFavoritesList);
 
   return (
     <div className="p-4 bg-white text-black min-h-screen">
@@ -77,7 +78,7 @@ const App = () => {
         </div>
       ) : (
         <ul className="space-y-4">
-          {getFavoritesList.map((song) => (
+          {searchResults.map((song) => (
             <li
               key={song.id}
               className="flex items-center justify-between space-x-4 cursor-pointer p-3 rounded-lg transition-all duration-300 hover:bg-gray-100 hover:shadow-md transform hover:-translate-y-1"
@@ -85,17 +86,15 @@ const App = () => {
             >
               <div className='flex items-center justify-center gap-5'>
                 <img
-                  src={song.image[2]?.url || song.image }
+                  src={song.image[2]?.url || song.image}
                   alt={song.name || song.title}
                   className="w-12 h-12 rounded transition-transform duration-300 hover:scale-110"
                 />
-
                 <span className="text-black transition-colors duration-300 hover:text-indigo-600">{song.name || song.title}</span>
               </div>
               <div>
-                {/* <button><FaRegHeart className='size-5' /></button> */}
+                <button><FaRegHeart className='size-5' /></button>
               </div>
-
             </li>
           ))}
         </ul>

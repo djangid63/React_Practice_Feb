@@ -1,18 +1,17 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { TiHeartOutline } from "react-icons/ti";
+import { useSelector } from 'react-redux';
 
 const LogIn = () => {
   const [email, setEmail] = useState('')
   const [password, SetPassword] = useState('')
   const navigateToPlayer = useNavigate();
+  const { storedEmail, storedPassword } = useSelector((state) => state.auth)
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-
-    const userData = JSON.parse(localStorage.getItem('user'))
-    if (email === userData.email && password === userData.password) {
+    if (email === storedEmail && password === storedPassword) {
       alert("Log In successfull!");
       navigateToPlayer('/Homepage')
     }

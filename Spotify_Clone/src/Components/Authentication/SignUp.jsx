@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { TiHeartOutline } from "react-icons/ti";
+import { useDispatch } from 'react-redux';
+import { userCredentials } from '../../Redux/Slice/Auth';
 
 
 const SignUp = () => {
@@ -8,9 +10,10 @@ const SignUp = () => {
   const [email, setEmail] = useState('')
   const [password, SetPassword] = useState('')
   const navigateToLogInPage = useNavigate();
+  const dispatch = useDispatch()
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     const data = {
       fullName,
@@ -18,7 +21,12 @@ const SignUp = () => {
       password
     }
 
-    localStorage.setItem('user', JSON.stringify(data))
+    dispatch(userCredentials({fullName, email, password }))
+
+
+
+    // localStorage.setItem('user', JSON.stringify(data))
+
     alert("Account created successfully!");
 
 
