@@ -9,17 +9,21 @@ import { PiShuffleLight } from "react-icons/pi";
 import { IoIosRepeat } from "react-icons/io";
 import { RxTrackNext } from "react-icons/rx";
 import { RxTrackPrevious } from "react-icons/rx";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { addToFav } from '../../Redux/Slice/Favourite';
 
 const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [audio] = useState(new Audio());
+  const dispatch = useDispatch()
+  const track = useSelector((state) => state.track.song);
+  const favorites = useSelector(state => state.favorites.songs);
 
-  const track = useSelector((state) => state.track);
-
+  // Play the track when it changes
   useEffect(() => {
+
     if (track?.downloadUrl) {
       audio.src = track.downloadUrl;
       if (isPlaying) {
@@ -50,6 +54,24 @@ const MusicPlayer = () => {
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
+  const addFavorite = (song, e) => {
+    e.stopPropagation();
+    console.log(song);
+    let primaryArtist = song.artists.primary.map((artist) => artist.name)
+    const songData = {
+      id: song.id,
+      name: song.name,
+      image: song.image[2]?.url,
+      primaryArtists: primaryArtist,
+      downloadUrl: song.downloadUrl?.find(file => file.quality === '320kbps')?.url || '',
+      duration: song.duration,
+      year: song.year,
+    };
+    // console.log("Before dispatch ------ Current favorites:-----", favorites);
+    dispatch(addToFav(songData));
+    // console.log("After dispatch ------- Action payload:-----", songData);
+  }
+
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-gray-100 to-gray-200 h-16 sm:h-23 flex items-center justify-between px-4 border-t-2 border-gray-300 shadow-lg transition-all duration-300">
       {/* No need for an audio element in the DOM */}
@@ -68,7 +90,7 @@ const MusicPlayer = () => {
           </div>
         </div>
         <div className="flex space-x-2">
-          <FaRegHeart className="w-3 h-3 sm:w-5 sm:h-5 text-black transition-transform duration-300 hover:scale-125 hover:text-red-500 cursor-pointer" />
+          <FaRegHeart onClick={(e) => addFavorite(track.song, e)} className="w-3 h-3 sm:w-5 sm:h-5 text-black transition-transform duration-300 hover:scale-125 hover:text-red-500 cursor-pointer" />
         </div>
       </div>
 

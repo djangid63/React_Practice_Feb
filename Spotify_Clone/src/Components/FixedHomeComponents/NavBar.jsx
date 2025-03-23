@@ -2,10 +2,13 @@ import React, { useContext } from 'react'
 import { MdSearch } from "react-icons/md";
 import { FaRegBell } from "react-icons/fa";
 import { SearchContext } from '../UseContext/SearchContext';
+import { useDispatch } from 'react-redux';
+import { addToFav } from '../../Redux/Slice/Favourite';
 
 const NavBar = () => {
-  // Use context directly without custom hook
   const { search, setSearch } = useContext(SearchContext);
+  const dispatch = useDispatch((state) => state)
+  
 
   return (
     <nav className='w-full flex justify-between items-center my-[6px] mx-2 sm:m-3 sm:mx-6 '>
