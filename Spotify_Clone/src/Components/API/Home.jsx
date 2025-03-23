@@ -4,33 +4,24 @@ import { SearchContext } from '../UseContext/SearchContext';
 import { FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { addToFav } from '../../Redux/Slice/Favourite'
+import { addTrack } from '../../Redux/Slice/CurrentTrack'
 
 
 const App = () => {
-  const { search, setCurrentTrack } = useContext(SearchContext);
+  const { search } = useContext(SearchContext);
+  const [songList, setSongList] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [songs, setSongs] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
-  const debounceTimeout = useRef(null);
-  const dispatch = useDispatch()
   const favorites = useSelector(state => state.favorites.songs);
-  console.log("Current favorites in state:", favorites);
+  const dispatch = useDispatch()
 
-  // Filter songs when search changes
   useEffect(() => {
-    if (search && searchResults.length > 0) {
-      console.log("Current search:", search);
-
-      const filteredSongs = searchResults.filter(song =>
+    if (search) {
+      const filteredSongs = songList.filter(song =>
         song.name.toLowerCase().includes(search.toLowerCase())
       );
-      setSongs(filteredSongs);
-    } else {
-      if (songs !== searchResults) {
-        setSongs(searchResults);
-      }
+      setSongList(filteredSongs);
     }
-  }, [search, searchResults]);
+  }, [search]);
 
   const fetchAPI = async () => {
     setLoading(true);
@@ -41,7 +32,7 @@ const App = () => {
         params: { query: search || 'Hollywood', limit: 10 },
       };
       const { data } = await axios.request(options);
-      setSearchResults(data.data.results);
+      setSongList(data.data.results);
       setLoading(false)
 
     } catch (error) {
@@ -49,6 +40,7 @@ const App = () => {
     }
   };
 
+  const debounceTimeout = useRef(null);
   useEffect(() => {
     if (debounceTimeout.current) {
       clearTimeout(debounceTimeout.current);
@@ -58,22 +50,29 @@ const App = () => {
     }, 300);
   }, [search])
 
+
+
   const playSong = (song) => {
     const highestQuality = song.downloadUrl?.find((file) => file.quality === '320kbps') || song.url;
-    setCurrentTrack({
-      url: highestQuality.url,
-      title: song.name,
-      artist: song.primaryArtists || "Unknown",
+    const primaryArtist = song.artists.primary.map((artist) => artist.name)
+
+    const track = {
+      id: song.id,
+      name: song.name,
       image: song.image[2]?.url,
-    });
-    console.log(song);
+      primaryArtists: primaryArtist,
+      downloadUrl: highestQuality.url,
+      duration: song.duration,
+      year: song.year,
+    }
+    dispatch(addTrack(track))
+
   };
 
   const addFavorite = (song, e) => {
     e.stopPropagation();
 
     let primaryArtist = song.artists.primary.map((artist) => artist.name)
-
     const songData = {
       id: song.id,
       name: song.name,
@@ -83,9 +82,9 @@ const App = () => {
       duration: song.duration,
       year: song.year,
     };
-    console.log("Before dispatch ------ Current favorites:-----", favorites);
+    // console.log("Before dispatch ------ Current favorites:-----", favorites);
     dispatch(addToFav(songData));
-    console.log("After dispatch ------- Action payload:-----", songData);
+    // console.log("After dispatch ------- Action payload:-----", songData);
   }
 
 
@@ -99,7 +98,7 @@ const App = () => {
         </div>
       ) : (
         <ul className="space-y-4">
-          {searchResults.map((song) => (
+          {songList.map((song) => (
             <li
               key={song.id}
               className="flex items-center justify-between space-x-4 cursor-pointer p-3 rounded-lg transition-all duration-300 hover:bg-gray-100 hover:shadow-md transform hover:-translate-y-1"

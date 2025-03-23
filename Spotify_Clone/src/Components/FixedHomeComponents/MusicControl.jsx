@@ -1,7 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { SearchContext } from '../UseContext/SearchContext';
+import React, { useEffect, useState } from 'react';
 import { FaRegHeart } from "react-icons/fa";
-import { CiCirclePlus } from "react-icons/ci";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { PiSpeakerHighDuotone } from "react-icons/pi";
 import { HiOutlineSpeakerXMark } from "react-icons/hi2";
@@ -11,51 +9,39 @@ import { PiShuffleLight } from "react-icons/pi";
 import { IoIosRepeat } from "react-icons/io";
 import { RxTrackNext } from "react-icons/rx";
 import { RxTrackPrevious } from "react-icons/rx";
+import { useSelector } from 'react-redux';
 
 const MusicPlayer = () => {
-  const { currentTrack } = useContext(SearchContext);
-  const audioRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [favoriotSongs, setFavoriotSongs] = useState([]);
+  const [audio] = useState(new Audio());
 
-  // Load favorites from localStorage when the component mounts
-  useEffect(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    setFavoriotSongs(storedFavorites);
-  }, []);
+  const track = useSelector((state) => state.track);
 
-  // Play the track when it changes
   useEffect(() => {
-    if (currentTrack && audioRef.current) {
-      audioRef.current.play()
-        .then(() => setIsPlaying(true))
-        .catch(e => console.error('Playback failed:', e));
+    if (track?.downloadUrl) {
+      audio.src = track.downloadUrl;
+      if (isPlaying) {
+        audio.play();
+      } else {
+        audio.pause()
+      }
     }
-  }, [currentTrack]);
+  }, [track, isPlaying]);
+
+
 
   const togglePlayPause = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
+    setIsPlaying(!isPlaying);
   };
 
   const handleTimeUpdate = () => {
-    if (audioRef.current) {
-      setCurrentTime(audioRef.current.currentTime);
-    }
+    setCurrentTime(audio.currentTime);
   };
 
   const handleLoadedMetadata = () => {
-    if (audioRef.current) {
-      setDuration(audioRef.current.duration);
-    }
+    setDuration(audio.duration);
   };
 
   const formatTime = (time) => {
@@ -64,39 +50,25 @@ const MusicPlayer = () => {
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
-  const handleFavorites = () => {
-    setFavoriotSongs(prevFavoriotSongs => {
-      const updatedFavorites = [...prevFavoriotSongs, currentTrack];
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-      return updatedFavorites;
-    });
-  };
-
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-gray-100 to-gray-200 h-16 sm:h-23 flex items-center justify-between px-4 border-t-2 border-gray-300 shadow-lg transition-all duration-300">
-      {/* Hidden audio element */}
-      <audio
-        ref={audioRef}
-        src={currentTrack?.url}
-        onTimeUpdate={handleTimeUpdate}
-        onLoadedMetadata={handleLoadedMetadata}
-      />
+      {/* No need for an audio element in the DOM */}
 
       {/* Left: Track Information */}
       <div className="flex items-center space-x-5 group">
         <div className='flex items-center justify-center gap-2'>
           <img
-            src={currentTrack?.image || "https://placehold.co/40"}
+            src={track?.image || "https://placehold.co/40"}
             alt="Album cover"
             className="w-10 h-10 rounded shadow-md transition-transform duration-300 group-hover:scale-110"
           />
           <div className="transition-all duration-300 group-hover:translate-x-1">
-            <p className="text-sm font-semibold text-black">{currentTrack?.title || "No track selected"}</p>
-            <p className="text-xs text-gray-600">{currentTrack?.artist || "Unknown artist"}</p>
+            <p className="text-sm font-semibold text-black">{track?.name}</p>
+            <p className="text-xs text-gray-600">{track?.primaryArtists || "Unknown artist"}</p>
           </div>
         </div>
         <div className="flex space-x-2">
-          <FaRegHeart onClick={handleFavorites} className="w-3 h-3 sm:w-5 sm:h-5 text-black transition-transform duration-300 hover:scale-125 hover:text-red-500 cursor-pointer" />
+          <FaRegHeart className="w-3 h-3 sm:w-5 sm:h-5 text-black transition-transform duration-300 hover:scale-125 hover:text-red-500 cursor-pointer" />
         </div>
       </div>
 
