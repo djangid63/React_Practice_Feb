@@ -2,18 +2,19 @@ import React, { useEffect, useState, useRef, useContext } from 'react';
 import axios from 'axios';
 import { SearchContext } from '../UseContext/SearchContext';
 import { FaRegHeart } from "react-icons/fa";
-import { useDispatch } from 'react-redux';
-import { addToFav } from '../../Redux/Slice/Favorite'
+import { useDispatch, useSelector } from 'react-redux';
+import { addToFav } from '../../Redux/Slice/Favourite'
 
 
 const App = () => {
   const { search, setCurrentTrack } = useContext(SearchContext);
-
   const [loading, setLoading] = useState(false);
   const [songs, setSongs] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const debounceTimeout = useRef(null);
   const dispatch = useDispatch()
+  const favorites = useSelector(state => state.favorites.songs);
+  console.log("Current favorites in state:", favorites);
 
   // Filter songs when search changes
   useEffect(() => {
@@ -37,7 +38,7 @@ const App = () => {
       const options = {
         method: 'GET',
         url: 'https://saavn.dev/api/search/songs',
-        params: { query: search || 'English', limit: 40 },
+        params: { query: search || 'Hollywood', limit: 10 },
       };
       const { data } = await axios.request(options);
       setSearchResults(data.data.results);
@@ -63,9 +64,29 @@ const App = () => {
       url: highestQuality.url,
       title: song.name,
       artist: song.primaryArtists || "Unknown",
-      image: song.image[2]?.url || song.image,
+      image: song.image[2]?.url,
     });
+    console.log(song);
   };
+
+  const addFavorite = (song, e) => {
+    e.stopPropagation();
+
+    let primaryArtist = song.artists.primary.map((artist) => artist.name)
+
+    const songData = {
+      id: song.id,
+      name: song.name,
+      image: song.image[2]?.url,
+      primaryArtists: primaryArtist,
+      downloadUrl: song.downloadUrl?.find(file => file.quality === '320kbps')?.url || '',
+      duration: song.duration,
+      year: song.year,
+    };
+    console.log("Before dispatch ------ Current favorites:-----", favorites);
+    dispatch(addToFav(songData));
+    console.log("After dispatch ------- Action payload:-----", songData);
+  }
 
 
   return (
@@ -86,14 +107,18 @@ const App = () => {
             >
               <div className='flex items-center justify-center gap-5'>
                 <img
-                  src={song.image[2]?.url || song.image}
-                  alt={song.name || song.title}
+                  src={song.image[2]?.url}
+                  alt={song.name}
                   className="w-12 h-12 rounded transition-transform duration-300 hover:scale-110"
                 />
-                <span className="text-black transition-colors duration-300 hover:text-indigo-600">{song.name || song.title}</span>
+                <span className="text-black transition-colors duration-300 hover:text-indigo-600">{song.name}</span>
               </div>
               <div>
-                <button><FaRegHeart className='size-5' /></button>
+                <button onClick={(e) => addFavorite(song, e)}>
+                  <FaRegHeart
+                    className={`size-5 ${favorites.some(favSong => favSong.id === song.id) ? 'fill-red-500' : ''}`}
+                  />
+                </button>
               </div>
             </li>
           ))}
