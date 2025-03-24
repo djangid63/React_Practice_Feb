@@ -34,11 +34,10 @@ const HomePage = () => {
           <NavBar />
         </div>
 
-        <div className="col-span-10 row-span-8 sm:row-span-6 absolute top-15 left-60 right-0 ">
+        <div className="pb-20 col-span-8 row-span-8 sm:row-span-6 absolute top-[5%] sm:top-[8%] left-[15%] right-0 ">
           {renderMain()}
         </div>
-
-        <div className=" col-span-11 row-span-8 border-t-2 border-gray-300 ">
+        <div className="col-span-11 row-span-8 border-t-2 border-gray-300 ">
           <MusicPlayer />
         </div>
       </div>

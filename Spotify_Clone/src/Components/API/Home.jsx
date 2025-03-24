@@ -89,7 +89,7 @@ const App = () => {
 
 
   return (
-    <div className="p-6 bg-gradient-to-br from-blue-50 to-purple-50 text-gray-800 min-h-screen animate-fadeIn">
+    <div className="p-6 bg-gradient-to-br from-blue-50 to-purple-50 text-gray-800 h-[100%] animate-fadeIn">
       <h2 className="text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-700 animate-slideDown">
         Music Player
       </h2>

@@ -73,7 +73,7 @@ const MusicPlayer = () => {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-gray-100 to-gray-200 h-16 sm:h-23 flex items-center justify-between px-4 border-t-2 border-gray-300 shadow-lg transition-all duration-300">
+    <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-gray-100 to-gray-200 h-16 sm:h-23 flex items-center justify-start px-4 border-t-2 border-gray-300 shadow-lg transition-all duration-300">
 
       {/* Left: Track Information */}
       <div className="flex items-center space-x-5 group">
