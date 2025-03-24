@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 
-const UseTheme = () => {
+const useTheme = () => {
 
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(true)
 
   const handleAppearance = () => {
     setIsDark(!isDark)
   }
 
-  return { 
-    isDark, handleAppearance
+  return {
+    isDark,
+    handleAppearance
   }
 }
 
-export default UseTheme
+export default useTheme

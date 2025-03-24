@@ -3,12 +3,18 @@ import { MdSearch } from "react-icons/md";
 import { FaRegBell } from "react-icons/fa";
 import { SearchContext } from '../UseContext/SearchContext';
 import { useDispatch } from 'react-redux';
+import UseTheme from '../../CustomHooks/UseTheme';
+import { CiLight, CiDark } from "react-icons/ci";
+
+
 import { addToFav } from '../../Redux/Slice/Favourite';
+
 
 const NavBar = () => {
   const { search, setSearch } = useContext(SearchContext);
   const dispatch = useDispatch((state) => state)
-  
+  const { isDark, handleAppearance } = UseTheme()
+
 
   return (
     <nav className='w-full flex justify-between items-center my-[6px] mx-2 sm:m-3 sm:mx-6 '>
@@ -26,7 +32,8 @@ const NavBar = () => {
         />
       </div>
       <div className=' flex justify-center items-center gap-5'>
-        <span><FaRegBell className='size-4 sm:size-6' /></span>
+        <button onClick={handleAppearance} >{isDark ? <CiLight className='size-4 sm:size-6' /> : <CiDark className='size-4 sm:size-6' />}</button>
+        <span><FaRegBell className='size-4 sm:size-5 text-gray-600 ' /></span>
         <span className='flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-primary rounded-full text-xs text-center'>DJ</span>
       </div>
     </nav>
