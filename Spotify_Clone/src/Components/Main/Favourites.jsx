@@ -1,9 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const Favorites = () => {
   const { songs } = useSelector((state) => state.favorites)
-  console.log(songs);
   return (
     <div className="p-4 bg-white text-black min-h-screen">
       <h2 className="text-2xl mb-4 transition-all duration-300 hover:text-indigo-600">Your Favorites</h2>

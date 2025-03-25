@@ -20,6 +20,8 @@ const MusicPlayer = () => {
   const dispatch = useDispatch()
   const track = useSelector((state) => state.track.songs);
   const favorites = useSelector(state => state.favorites.songs);
+  console.log("Track ---", track);
+  console.log("jjjjjjjjj");
 
   // Play the track when it changes
   useEffect(() => {

@@ -2,25 +2,27 @@ import React, { useContext } from 'react'
 import { MdSearch } from "react-icons/md";
 import { FaRegBell } from "react-icons/fa";
 import { SearchContext } from '../UseContext/SearchContext';
-import { useDispatch } from 'react-redux';
-import UseTheme from '../../CustomHooks/UseTheme';
 import { CiLight, CiDark } from "react-icons/ci";
-
-
+import { useDispatch, useSelector } from 'react-redux';
 import { addToFav } from '../../Redux/Slice/Favourite';
-
+import useTheme from '../../CustomHooks/UseTheme';
+// import { addDark } from '../../Redux/Slice/DarkSlice';
 
 const NavBar = () => {
   const { search, setSearch } = useContext(SearchContext);
-  const dispatch = useDispatch((state) => state)
-  const { isDark, handleAppearance } = UseTheme()
+  const { isDark, handleAppearance } = useTheme()
+  // const isDark = useSelector((state) => state.dark.isDark);
 
+  // const dispatch = useDispatch();
+  // const handleAppearance = () => {
+  //   dispatch(addDark(!isDark));
+  // };
 
   return (
-    <nav className='w-full flex justify-between items-center my-[6px] mx-2 sm:m-3 sm:mx-6 '>
-      <div className='flex items-center justify-start rounded-md focus-within:border-purple-400 bg-primary shadow-sm'>
+    <nav className={`w-full flex justify-between items-center my-[6px] mx-2 sm:m-3 sm:mx-6 ${isDark ? 'text-white' : 'text-gray-800'}`}>
+      <div className={`flex items-center justify-start rounded-md focus-within:border-purple-400 shadow-sm ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
         <label htmlFor='search' className='sr-only'>Search</label>
-        <MdSearch className="ml-2 mt-1 text-gray-500 sm:size-6 size-5" />
+        <MdSearch className={`ml-2 mt-1 sm:size-6 size-5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />
         <input
           type='text'
           id='search'
@@ -28,13 +30,15 @@ const NavBar = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder='Artists, titles, podcasts...'
-          className='sm:w-80 w-32 md:px-4 md:py-2 px-[1px] py-[1px] focus:outline-none bg-transparent sm:placeholder:text-base placeholder:text-xs rounded-full font-bold font-mono'
+          className={`sm:w-80 w-32 md:px-4 md:py-2 px-[1px] py-[1px] focus:outline-none bg-transparent sm:placeholder:text-base placeholder:text-xs rounded-full font-bold font-mono ${isDark ? 'placeholder:text-gray-400' : 'placeholder:text-gray-500'}`}
         />
       </div>
-      <div className=' flex justify-center items-center gap-5'>
-        <button onClick={handleAppearance} >{isDark ? <CiLight className='size-4 sm:size-6' /> : <CiDark className='size-4 sm:size-6' />}</button>
-        <span><FaRegBell className='size-4 sm:size-5 text-gray-600 ' /></span>
-        <span className='flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-primary rounded-full text-xs text-center'>DJ</span>
+      <div className='flex justify-center items-center gap-5'>
+        <button onClick={handleAppearance}>
+          {isDark ? <CiLight className='size-4 sm:size-6 text-white' /> : <CiDark className='size-4 sm:size-6 text-gray-800' />}
+        </button>
+        <span><FaRegBell className={`size-4 sm:size-5 ${isDark ? 'text-gray-300' : 'text-gray-600'}`} /></span>
+        <span className={`flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 rounded-full text-xs text-center ${isDark ? 'bg-gray-700' : 'bg-white'}`}>DJ</span>
       </div>
     </nav>
   )
