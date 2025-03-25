@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import NavBar from '../Components/FixedHomeComponents/NavBar'
-import SideBar from '../Components/FixedHomeComponents/SideBar'
-import Home from '../Components/FixedHomeComponents/Home'
-import MusicPlayer from '../Components/FixedHomeComponents/MusicControl';
-import Favorites from '../Components/Main/Favourites';
-import Explore from './../Components/Main/Explore';
+import NavBar from '../Components/MainComponents/NavBar'
+import SideBar from '../Components/MainComponents/SideBar'
+import Home from '../Components/MainComponents/Home'
+import MusicPlayer from '../Components/MainComponents/MusicControl';
+import Favorites from '../Components/MainComponents/Favourites';
+import Explore from '../Components/MainComponents/Explore';
 
 
 const HomePage = () => {
