@@ -4,22 +4,20 @@ import { FaRegBell } from "react-icons/fa";
 import { SearchContext } from '../UseContext/SearchContext';
 import { CiLight, CiDark } from "react-icons/ci";
 import { useDispatch, useSelector } from 'react-redux';
-import { addToFav } from '../../Redux/Slice/Favourite';
-import useTheme from '../../CustomHooks/UseTheme';
-// import { addDark } from '../../Redux/Slice/DarkSlice';
+import { toggleMode } from '../../Redux/Slice/toggleAppearance';
+
 
 const NavBar = () => {
   const { search, setSearch } = useContext(SearchContext);
-  const { isDark, handleAppearance } = useTheme()
-  // const isDark = useSelector((state) => state.dark.isDark);
+  const isDark = useSelector((state) => state.Mode.isDark)
 
-  // const dispatch = useDispatch();
-  // const handleAppearance = () => {
-  //   dispatch(addDark(!isDark));
-  // };
+  const dispatch = useDispatch();
+  const handleAppearance = () => {
+    dispatch(toggleMode());
+  };
 
   return (
-    <nav className={`w-full flex justify-between items-center my-[6px] mx-2 sm:m-3 sm:mx-6 ${isDark ? 'text-white' : 'text-gray-800'}`}>
+    <nav className={`w-full flex justify-between items-center py-[6px] px-2 sm:p-3 sm:px-6 ${isDark ? 'bg-gray-800' : 'bg-white'}  ${isDark ? 'text-white' : 'text-gray-800'}`}>
       <div className={`flex items-center justify-start rounded-md focus-within:border-purple-400 shadow-sm ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
         <label htmlFor='search' className='sr-only'>Search</label>
         <MdSearch className={`ml-2 mt-1 sm:size-6 size-5 ${isDark ? 'text-gray-400' : 'text-gray-500'}`} />

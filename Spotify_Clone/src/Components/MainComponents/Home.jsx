@@ -5,7 +5,6 @@ import { FaRegHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import { addToFav } from '../../Redux/Slice/Favourite'
 import { addTrack } from '../../Redux/Slice/CurrentTrack'
-import useTheme from '../../CustomHooks/UseTheme';
 
 
 const App = () => {
@@ -14,7 +13,7 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const favorites = useSelector(state => state.favorites.songs);
   const dispatch = useDispatch()
-  const { isDark, handleAppearance } = useTheme()
+  const isDark = useSelector((state) => state.Mode.isDark)
 
 
   useEffect(() => {
