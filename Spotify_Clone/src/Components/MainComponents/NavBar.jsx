@@ -9,7 +9,7 @@ import { toggleMode } from '../../Redux/Slice/toggleAppearance';
 
 const NavBar = () => {
   const { search, setSearch } = useContext(SearchContext);
-  const isDark = useSelector((state) => state.Mode.isDark)
+  const { isDark } = useSelector((state) => state.Mode)
 
   const dispatch = useDispatch();
   const handleAppearance = () => {
