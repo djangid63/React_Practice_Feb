@@ -17,7 +17,7 @@ const Favorites = () => {
                 <img src={song.} alt={song.name} className="w-12 h-12 rounded" />
                 <div>
                   <p className="text-black font-medium">{song.name}</p>
-                  <p className="text-gray-600 text-sm">{song.primaryArtists.join(', ')}</p>
+                  <p className="text-gray-600 text-sm">{song.primaryArtists.join(',  ')}</p>
                 </div>
               </div>
             </li>
