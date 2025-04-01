@@ -14,7 +14,7 @@ const Favorites = () => {
           {songs.map((song) => (
             <li key={song.id} className="flex items-center justify-between space-x-4 p-3 rounded-lg transition-all duration-300 hover:bg-gray-100 hover:shadow-md">
               <div className='flex items-center justify-center gap-5'>
-                <img src={song.} alt={song.name} className="w-12 h-12 rounded" />
+                <img src={song.name} alt={song.name} className="w-12 h-12 rounded" />
                 <div>
                   <p className="text-black font-medium">{song.name}</p>
                   <p className="text-gray-600 text-sm">{song.primaryArtists.join(',  ')}</p>
