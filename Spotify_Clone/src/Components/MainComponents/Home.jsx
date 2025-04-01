@@ -31,7 +31,7 @@ const App = () => {
       const options = {
         method: 'GET',
         url: 'https://saavn.dev/api/search/songs',
-        params: { query: search || 'Hollywood', limit: 10 },
+        params: { query: search || 'English', limit: 10 },
       };
       const { data } = await axios.request(options);
       setSongList(data.data.results);
