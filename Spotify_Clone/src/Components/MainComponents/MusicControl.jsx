@@ -21,7 +21,6 @@ const MusicPlayer = () => {
   const track = useSelector((state) => state.track.songs);
   const favorites = useSelector(state => state.favorites.songs);
   console.log("Track ---", track);
-  console.log("jjjjjjjjj");
 
 
   // Play the track when it changes
@@ -92,7 +91,7 @@ const MusicPlayer = () => {
             </div>
           </div>
           <div className="flex space-x-2">
-            <FaRegHeart onClick={(e) => addFavorite(track.songs[0], e)} className="w-3 h-3 sm:w-5 sm:h-5 text-black transition-transform duration-300 hover:scale-125 hover:text-red-500 cursor-pointer" />
+            <FaRegHeart onClick={(e) => addFavorite(track.songs, e)} className="w-3 h-3 sm:w-5 sm:h-5 text-black transition-transform duration-300 hover:scale-125 hover:text-red-500 cursor-pointer" />
           </div>
         </div>
         <div className="flex-1 flex flex-col items-center justify-center">
