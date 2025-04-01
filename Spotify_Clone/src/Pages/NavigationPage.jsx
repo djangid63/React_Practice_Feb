@@ -32,7 +32,7 @@ const HomePage = () => {
         <div className="flex items-center justify-between col-span-10 row-span-1 bg-background border-b-2 border-gray-300 fixed z-10 top-0 left-[15%] 2xl:left-[230px] right-0">
           <NavBar />
         </div>
-        <div className="pb-20 col-span-8 row-span-8 sm:row-span-6 absolute top-[5%] sm:top-[8%] left-[15%] right-0 ">
+        <div className=" col-span-8 row-span-8 sm:row-span-6 absolute top-[5%] sm:top-[8%] left-[15%] right-0 ">
           {renderMain()}
         </div>
         <div className="col-span-11 row-span-8 border-t-2 border-gray-300 ">

@@ -95,12 +95,12 @@ const App = () => {
       </h2>
 
       {loading ? (
-        <div className="flex items-center justify-center py-12">
-          <div className={`animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 ${isDark ? 'border-purple-400 shadow-lg shadow-purple-500/50' : 'border-purple-600 shadow-lg shadow-purple-500/30'}`}></div>
+        <div className="h-screen flex items-start justify-center py-12 ">
+          <div className={`animate-spin rounded-full h-16 w-16  border-b-4 ${isDark ? 'border-purple-400 shadow-lg shadow-purple-500/50' : 'border-purple-600 shadow-lg shadow-purple-500/30'}`}></div>
           <span className={`ml-4 ${isDark ? 'text-purple-400' : 'text-purple-600'} font-medium animate-pulse`}>Loading songs</span>
         </div>
       ) : (
-        <ul className="space-y-3">
+        <ul className="space-y-3 pb-20">
           {songList.map((song, index) => (
             <li
               key={song.id}
