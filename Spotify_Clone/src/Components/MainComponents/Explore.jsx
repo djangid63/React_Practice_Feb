@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-const Explore = () => {
+const Explore = ({ onSectionChange, activeSection }) => {
+  console.log(onSectionChange);
   const isDark = useSelector((state) => state.Mode.isDark)
 
   const genres = [
@@ -13,7 +14,11 @@ const Explore = () => {
     { id: 6, name: "Classical", color: "from-emerald-400/70 to-emerald-500/70", popular: "Für Elise" },
     { id: 7, name: "R&B", color: "from-indigo-400/70 to-indigo-500/70", popular: "Blinding Lights" },
     { id: 8, name: "Country", color: "from-orange-400/70 to-orange-500/70", popular: "Jolene" },
+    { id: 9, name: "Pop", color: "from-blue-400/50 to-blue-800/70", popular: "Lose Yourself" },
   ];
+
+
+
 
   return (
     <div className={`p-6 ${isDark ? 'bg-gradient-to-br from-gray-900 to-purple-900 text-gray-200' : 'bg-gradient-to-br from-blue-50 to-purple-50 text-gray-800'} h-[100%] animate-fadeIn`}>
@@ -31,6 +36,7 @@ const Explore = () => {
               : 'backdrop-blur-sm border border-gray-200/70 hover:border-purple-300/70'
               } cursor-pointer transition-all duration-300 shadow-sm hover:scale-[1.02] ${isDark ? 'hover:shadow-purple-500/20' : 'hover:shadow-purple-300/20'} animate-fadeInUp`}
             style={{ animationDelay: `${index * 0.1}s` }}
+            onClick={() => onSectionChange("genre")}
           >
             <h3 className="text-xl font-bold text-white mb-2 text-shadow">{genre.name}</h3>
             <div className="flex flex-col space-y-1">

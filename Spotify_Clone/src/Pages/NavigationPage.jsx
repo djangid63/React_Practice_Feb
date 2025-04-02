@@ -5,6 +5,7 @@ import Home from '../Components/MainComponents/Home'
 import MusicPlayer from '../Components/MainComponents/MusicControl';
 import Favorites from '../Components/MainComponents/Favourites';
 import Explore from '../Components/MainComponents/Explore';
+import Genre from '../Components/MainComponents/Genre';
 
 
 const HomePage = () => {
@@ -15,9 +16,11 @@ const HomePage = () => {
       case 'home':
         return <Home />;
       case 'explore':
-        return <Explore />
+        return <Explore onSectionChange={setActiveSection} activeSection={activeSection} />
       case 'favorites':
         return <Favorites />
+      case 'genre':
+        return <Genre />
       default:
         return <Home />;
     }
