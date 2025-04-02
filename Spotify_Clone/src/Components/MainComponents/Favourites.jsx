@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { FaHeart, FaPlay, FaPause } from 'react-icons/fa'
-// import { removeFromFav } from '../../Redux/Slice/Favourite'
+import { removeFromFav } from '../../Redux/Slice/Favourite'
 import { addTrack } from '../../Redux/Slice/currentTrack'
 
 const Favorites = () => {

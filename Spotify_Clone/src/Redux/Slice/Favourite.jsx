@@ -14,10 +14,13 @@ export const favSlice = createSlice({
       if (!exists) {
         state.songs.push(action.payload);
       }
+    },
+    removeFromFav: (state, action) => {
+      state.songs = state.songs.filter((song) => song.id !== action.payload);
     }
   }
 })
 
-export const { addToFav } = favSlice.actions;
+export const { addToFav, removeFromFav } = favSlice.actions;
 
 export default favSlice.reducer

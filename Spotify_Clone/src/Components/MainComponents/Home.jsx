@@ -31,7 +31,8 @@ const App = () => {
       const options = {
         method: 'GET',
         url: 'https://saavn.dev/api/search/songs',
-        params: { query: search || 'English', limit: 40 },
+        // url: 'https://saavn.dev/api/search/playlists',
+        params: { query: search || 'English', limit: 10 },
       };
       const { data } = await axios.request(options);
       setSongList(data.data.results);
@@ -57,7 +58,6 @@ const App = () => {
   const playSong = (song) => {
     const highestQuality = song.downloadUrl?.find((file) => file.quality === '320kbps') || song.url;
     const primaryArtist = song.artists.primary.map((artist) => artist.name)
-    console.log("PA---------", primaryArtist[0]);
 
     const track = {
       id: song.id,
@@ -88,16 +88,16 @@ const App = () => {
     };
     dispatch(addToFav(songData));
   }
-  console.log(songList.map((val) => val.artists.primary[0].name));
+  // console.log(songList.map((val) => val.artists.primary[0].name));
 
   return (
-    <div className={`p-6 ${isDark ? 'bg-gradient-to-br from-gray-900 to-purple-900 text-gray-200' : 'bg-gradient-to-br from-blue-50 to-purple-50 text-gray-800'} h-[100%] animate-fadeIn`}>
+    <div className={`h-screen p-6 ${isDark ? 'bg-gradient-to-br from-gray-900 to-purple-900 text-gray-200' : 'bg-gradient-to-br from-blue-50 to-purple-50 text-gray-800'} h-[100%] animate-fadeIn`}>
       <h2 className={`text-3xl font-bold mb-6 text-transparent bg-clip-text ${isDark ? 'bg-gradient-to-r from-blue-400 to-purple-400' : 'bg-gradient-to-r from-indigo-600 to-purple-700'} animate-slideDown`}>
         Music Player
       </h2>
 
       {loading ? (
-        <div className="h-screen flex items-start justify-center py-12 ">
+        <div className="flex items-center justify-center py-12">
           <div className={`animate-spin rounded-full h-16 w-16  border-b-4 ${isDark ? 'border-purple-400 shadow-lg shadow-purple-500/50' : 'border-purple-600 shadow-lg shadow-purple-500/30'}`}></div>
           <span className={`ml-4 ${isDark ? 'text-purple-400' : 'text-purple-600'} font-medium animate-pulse`}>Loading songs</span>
         </div>
