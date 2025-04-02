@@ -57,12 +57,13 @@ const App = () => {
   const playSong = (song) => {
     const highestQuality = song.downloadUrl?.find((file) => file.quality === '320kbps') || song.url;
     const primaryArtist = song.artists.primary.map((artist) => artist.name)
+    console.log("PA---------", primaryArtist[0]);
 
     const track = {
       id: song.id,
       name: song.name,
       image: song.image[2]?.url,
-      primaryArtists: primaryArtist,
+      primaryArtists: primaryArtist[0],
       downloadUrl: highestQuality.url,
       duration: song.duration,
       year: song.year,
@@ -75,6 +76,7 @@ const App = () => {
     e.stopPropagation();
 
     let primaryArtist = song.artists.primary.map((artist) => artist.name)
+
     const songData = {
       id: song.id,
       name: song.name,
@@ -86,7 +88,7 @@ const App = () => {
     };
     dispatch(addToFav(songData));
   }
-
+  console.log(songList.map((val) => val.artists.primary[0].name));
 
   return (
     <div className={`p-6 ${isDark ? 'bg-gradient-to-br from-gray-900 to-purple-900 text-gray-200' : 'bg-gradient-to-br from-blue-50 to-purple-50 text-gray-800'} h-[100%] animate-fadeIn`}>
@@ -127,7 +129,8 @@ const App = () => {
                 <div className="flex flex-col">
                   <span className={`font-medium text-lg ${isDark ? 'text-gray-200 group-hover:text-purple-400' : 'text-gray-800 group-hover:text-purple-700'} transition-colors duration-300`}>{song.name}</span>
                   <span className={`text-sm ${isDark ? 'text-gray-400 group-hover:text-gray-300' : 'text-gray-600 group-hover:text-gray-700'} transition-colors duration-300`}>
-                    {song.artists?.primary?.map(artist => artist.name).join(', ')}
+                    {/* {song.artists?.primary?.map(artist => artist.name)} */}
+                    {song.artists?.primary[0].name}
                   </span>
                 </div>
               </div>
