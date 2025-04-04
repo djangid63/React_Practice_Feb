@@ -9,7 +9,7 @@ const Genre = () => {
   const dispatch = useDispatch()
   const isDark = useSelector((state) => state.Mode.isDark)
 
-
+  console.log(isDark);
   useEffect(() => {
     if (search) {
       const filteredSongs = songList.filter(song =>
