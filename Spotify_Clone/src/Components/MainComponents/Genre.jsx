@@ -18,6 +18,8 @@ const Genre = () => {
       setSongList(filteredSongs);
     }
   }, [search]);
+  
+  console.log(isDark);
 
   const fetchAPI = async () => {
     setLoading(true);
