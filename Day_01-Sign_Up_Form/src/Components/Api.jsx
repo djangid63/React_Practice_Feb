@@ -18,6 +18,8 @@ const Api = () => {
     fetchData();
   }, [])
 
+
+
   return (
     <div className="min-h-screen bg-gray-100 py-8 shadow-md shadow-black">
       <h1 className="text-3xl font-bold text-center text-blue-600 mb-8">API Fetched Users Mail Successfully</h1>
@@ -36,5 +38,6 @@ const Api = () => {
     </div>
   )
 }
+
 
 export default Api

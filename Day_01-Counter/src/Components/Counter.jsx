@@ -1,17 +1,15 @@
 import React, { useState } from 'react'
 
 const Counter = () => {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   const increment = () => {
-    setCount((prevCount) => count < 10 ? prevCount + 1 : count)
+    setCount((preVal) => preVal + 1)
+  }
+  const decrement = () => {
+    setCount((preVal) => preVal > 0 ? preVal - 1 : preVal)
   }
 
-  const decrement = () => {
-    setCount((prevCount) => count > 0 ? prevCount - 1 : count)
-    if (count < 1)
-      alert('You cannot go below 0')
-  }
 
   return (
     <div className='w-[100vw] h-[100vh] flex justify-center items-center'>

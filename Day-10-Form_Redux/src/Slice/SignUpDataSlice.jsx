@@ -8,9 +8,6 @@ export const dataSlice = createSlice({
     firstName: '',
     lastName: '',
   },
-
-
-
   reducers: {
     addData: (state, action) => {
       state.storedEmail = action.payload.email;

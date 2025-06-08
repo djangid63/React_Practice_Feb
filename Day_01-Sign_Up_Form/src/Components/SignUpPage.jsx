@@ -7,8 +7,6 @@ const SignUpPage = () => {
   const [firstName, setfirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {

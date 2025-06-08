@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import SignUpDataReducer from '../Slice/SignUpDataSlice'
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     data: SignUpDataReducer
   },
 })
+export default store
